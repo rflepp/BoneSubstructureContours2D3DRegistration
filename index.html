@@ -1,134 +1,136 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Multi-view X-ray/CT Registration</title>
+  <style>
+    :root {
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --color-bg: #ffffff;
+      --color-text: #111111;
+      --color-accent: #000000;
+      --spacing: 1.5rem;
+      --max-width: 800px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(8px);
+      padding: var(--spacing);
+      text-align: center;
+      z-index: 100;
+      border-bottom: 1px solid #eee;
+    }
+    nav a {
+      margin: 0 var(--spacing);
+      text-decoration: none;
+      color: var(--color-text);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--color-accent); }
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--spacing);
+    }
+    h1, h2 {
+      margin-bottom: var(--spacing);
+      font-weight: 700;
+    }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    .buttons {
+      margin-top: var(--spacing);
+    }
+    .btn {
+      display: inline-block;
+      margin-right: var(--spacing);
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--color-accent);
+      color: var(--color-accent);
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+    .btn:hover {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+    section {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    section:nth-of-type(1) { animation-delay: 0.3s; }
+    section:nth-of-type(2) { animation-delay: 0.6s; }
+    section:nth-of-type(3) { animation-delay: 0.9s; }
+    section:nth-of-type(4) { animation-delay: 1.2s; }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    img { max-width: 100%; border-radius: 8px; }
+    footer {
+      text-align: center;
+      padding: var(--spacing);
+      font-size: 0.875rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#hero">Start</a>
+    <a href="#abstract">Abstract</a>
+    <a href="#demo">Demo</a>
+    <a href="#citation">Citation</a>
+  </nav>
 
-export default function ProjectPage() {
-  return (
-    <div className="min-h-screen bg-white text-gray-900 antialiased scroll-smooth">
-      {/* Navbar */}
-      <nav className="fixed top-0 w-full backdrop-blur bg-white/50 z-50">
-        <div className="max-w-5xl mx-auto flex justify-between items-center py-4 px-6">
-          <h1 className="text-xl font-semibold">Multi-view X-ray/CT Registration</h1>
-          <div className="space-x-6">
-            <a href="#abstract" className="hover:underline">Abstract</a>
-            <a href="#demo" className="hover:underline">Demo</a>
-            <a href="#citation" className="hover:underline">Citation</a>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section id="hero" className="h-screen flex items-center justify-center px-6 pt-20">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Automatic Multi-view X-ray/CT Registration
-            <br />using Bone Substructure Contours
-          </h2>
-          <p className="text-lg md:text-xl mb-8 leading-relaxed">
-            A novel, fully automated registration method achieving sub-millimeter accuracy for intraoperative bone registration.
-          </p>
-          <div className="flex justify-center space-x-6">
-            <a
-              href="paper.pdf"
-              className="px-6 py-3 bg-black text-white rounded-2xl uppercase tracking-wide hover:bg-gray-800 transition"
-            >
-              Read Paper
-            </a>
-            <a
-              href="https://github.com/rflepp/MultiviewXrayCT-Registration"
-              className="px-6 py-3 border-2 border-black rounded-2xl uppercase tracking-wide hover:bg-black hover:text-white transition"
-            >
-              View Code
-            </a>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Abstract Section */}
-      <section id="abstract" className="py-20 px-6 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <motion.h3
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl font-semibold mb-4"
-          >
-            Abstract
-          </motion.h3>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg leading-relaxed"
-          >
-            Accurate intraoperative X-ray/CT registration is essential for surgical navigation in orthopedic procedures. However, existing methods struggle with robustness or require manual steps. We propose a contour-based ICP optimization focusing on bone substructures to reduce ambiguity and operate fully automatically using only two X-ray images, achieving sub-millimeter accuracy and user-friendly integration into surgical workflows.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Demo Section */}
-      <section id="demo" className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h3
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl font-semibold mb-8"
-          >
-            Demo
-          </motion.h3>
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="overflow-hidden rounded-2xl shadow-lg"
-          >
-            <img
-              src="assets/example.png"
-              alt="Example result"
-              className="w-full h-auto"
-            />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Citation Section */}
-      <section id="citation" className="py-20 px-6 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <motion.h3
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl font-semibold mb-4"
-          >
-            Citation
-          </motion.h3>
-          <motion.pre
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white p-6 rounded-2xl shadow-inner overflow-auto"
-          >
-            @inproceedings{flepp2024automulti,
-              title={{Automatic Multi-view X-ray/CT Registration using Bone Substructure Contours}},
-              author={{Flepp, Roman and Nissen, Leon and Sigrist, Bastian and Nieuwland, Arend and Cavalcanti, Nicola and Fürnstahl, Philipp and Dreher, Thomas and Calvet, Lilian}},
-              booktitle={{CVPR}},
-              year={{2024}}
-            }
-          </motion.pre>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-6 text-center">
-        <p className="text-sm text-gray-500">
-          &copy; {new Date().getFullYear()} Roman Flepp et al. All rights reserved.
-        </p>
-      </footer>
+  <section id="hero" class="container">
+    <h1>Automatic Multi-view X‑ray/CT Registration</h1>
+    <p>A novel, fully automated Registrierungsmethode für intraoperative Anwendung mit sub‑Millimeter‑Genauigkeit.</p>
+    <div class="buttons">
+      <a href="paper.pdf" class="btn btn-primary">Paper</a>
+      <a href="https://github.com/rflepp/MultiviewXrayCT-Registration" class="btn">Code</a>
     </div>
-  );
-}
+  </section>
+
+  <section id="abstract" class="container">
+    <h2>Abstract</h2>
+    <p>Accurate intraoperative X‑ray/CT registration is essential for surgical navigation in orthopedic procedures. However, existing methods struggle with robustness or require manual steps. We propose a contour-based ICP optimization focusing on bone substructures to reduce ambiguity and operate fully automatically using only two X‑ray images, achieving sub‑millimeter accuracy and user-friendly integration into surgical workflows.</p>
+  </section>
+
+  <section id="demo" class="container">
+    <h2>Demo</h2>
+    <img src="assets/example.png" alt="Example result">
+  </section>
+
+  <section id="citation" class="container">
+    <h2>Citation</h2>
+    <pre>@inproceedings{flepp2024automulti,
+  title={Automatic Multi-view X‑ray/CT Registration using Bone Substructure Contours},
+  author={Flepp, Roman and Nissen, Leon and Sigrist, Bastian et al.},
+  booktitle={CVPR},
+  year={2024}
+}</pre>
+  </section>
+
+  <footer>&copy; 2024 Roman Flepp et al.</footer>
+</body>
+</html>
